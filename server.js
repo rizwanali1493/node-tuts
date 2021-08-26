@@ -61,7 +61,7 @@ app.post("/", async (req, res) => {
 app.get("/:getId", async (req, res) => {
   try {
     const data = await post.find({ _id: req.params.getId });
-    // const data = await post.findone({ _id: req.params.getId }); 
+    // const data = await post.findone({ _id: req.params.getId });
     // findone use for geting 1st id matched object
     // res.json(data);   give similer result same as below
     res.send(data);
@@ -71,33 +71,35 @@ app.get("/:getId", async (req, res) => {
 });
 
 //---------- put data ------------
-app.put("/update/:getId", async(req, res)=>{
-  try{
-    const data = await post.findByIdAndUpdate({
-      _id: req.params.getId
-    },req.body,
-    {
-      new: true,
-      runValidators: true
-    }
-    )
-  res.send(data)
-  }catch(error){
-    res.send(500)
+app.put("/update/:getId", async (req, res) => {
+  try {
+    const data = await post.findByIdAndUpdate(
+      {
+        _id: req.params.getId,
+      },
+      req.body,
+      {
+        new: true,
+        runValidators: true,
+      }
+    );
+    res.send(data);
+  } catch (error) {
+    res.send(500);
   }
-})
+});
 
 //----------- delete data -------------
-app.delete("/delete/:getId", async(req, res)=>{
-  try{
+app.delete("/delete/:getId", async (req, res) => {
+  try {
     const data = await post.findByIdAndRemove({
-      _id: req.params.getId
-    })
-    res.send(data)
-  }catch(error){
-    req.send(500)
+      _id: req.params.getId,
+    });
+    res.send(data);
+  } catch (error) {
+    req.send(500);
   }
-})
+});
 
 //---------- get all data ----------
 app.get("/", async (req, res) => {
@@ -107,4 +109,8 @@ app.get("/", async (req, res) => {
   } catch (error) {
     res.status(500);
   }
+});
+
+app.get("/", async (req, res) => {
+  res.send("welcome to live server of heroku !!!");
 });
